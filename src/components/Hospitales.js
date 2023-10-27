@@ -34,13 +34,7 @@ export default class Hospitales extends Component {
 
   incrementarSalario = (e) => {
     e.preventDefault();
-    var arrayIdsHosp = [];
-    var options = this.cajaArrayHospitales.current.options;
-    for (var option of options) {
-      if (option.selected === true) {
-        arrayIdsHosp.push(option.value);
-      }
-    }
+    var arrayIdsHosp = getHospitalesSeleccionados();
     var incremento = this.cajaIncremento.current.value;
     var cadenaHospitales = "";
     for (var idhospital of arrayIdsHosp) {
@@ -60,6 +54,13 @@ export default class Hospitales extends Component {
 
   buscarTrabajadores = (e) => {
     e.preventDefault();
+    var arrayIdsHosp = getHospitalesSeleccionados();
+    this.setState({
+      idhospitales: arrayIdsHosp
+    });
+  }
+
+  getHospitalesSeleccionados=()=>{
     var arrayIdsHosp = [];
     var options = this.cajaArrayHospitales.current.options;
     for (var option of options) {
@@ -67,9 +68,7 @@ export default class Hospitales extends Component {
         arrayIdsHosp.push(option.value);
       }
     }
-    this.setState({
-      idhospitales: arrayIdsHosp
-    });
+    return arrayIdsHosp;
   }
 
   render() {
